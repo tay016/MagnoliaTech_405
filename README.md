@@ -3,7 +3,9 @@
 ## Available Scripts
 
 In the project directory, you can run:
+
 Magnolia Technologies Hierarchy App
+
 CSC 405 Spring 2021 Hierarchy Project
 
 # What is it?
