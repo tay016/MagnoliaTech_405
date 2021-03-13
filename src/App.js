@@ -4,6 +4,7 @@ import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listNotes } from './graphql/queries';
 import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
+import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '' }
 
@@ -86,6 +87,11 @@ function App() {
         ))
       }
       </div>
+
+      <div className="col-md-4 center">
+        <ExportCSV csvData={this.state.customers} fileName={this.state.fileName} />
+      </div>
+
       <AmplifySignOut />
     </div>
   );
