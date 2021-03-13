@@ -88,10 +88,6 @@ function App() {
       }
       </div>
 
-      <div className="col-md-4 center">
-        <ExportCSV csvData={this.state.customers} fileName={this.state.fileName} />
-      </div>
-
       <AmplifySignOut />
     </div>
   );
