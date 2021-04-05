@@ -3,7 +3,7 @@ import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listLevels } from './graphql/queries';
-import { createLevel as createNoteMutation, deleteLevel as deleteNoteMutation } from './graphql/mutations';
+import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '' }
