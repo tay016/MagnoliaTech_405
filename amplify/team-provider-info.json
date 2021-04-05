@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-magnoliatech405-dev-142107-authRole",
+      "UnauthRoleArn": "arn:aws:iam::605126939097:role/amplify-magnoliatech405-dev-142107-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::605126939097:role/amplify-magnoliatech405-dev-142107-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-magnoliatech405-dev-142107-deployment",
+      "UnauthRoleName": "amplify-magnoliatech405-dev-142107-unauthRole",
+      "StackName": "amplify-magnoliatech405-dev-142107",
+      "StackId": "arn:aws:cloudformation:us-east-1:605126939097:stack/amplify-magnoliatech405-dev-142107/d68bfc80-8fd0-11eb-933e-0e0494eb61ff",
+      "AmplifyAppId": "d3o65280w1r6x2"
+    },
+    "categories": {
+      "auth": {
+        "magnoliatech40528b86d1a": {}
+      }
+    }
+  }
+}

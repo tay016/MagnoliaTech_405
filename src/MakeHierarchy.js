@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { listNotes } from './graphql/queries';
-import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
+import { listLevels } from './graphql/queries';
+import { createLevel as createNoteMutation, deleteLevel as deleteNoteMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '' }
@@ -69,10 +69,12 @@ function MakeHierarchy() {
       />
 
       <input
-        type="file"
-        onChange={onChange}
+        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+        placeholder="Note description"
+        value={formData.description}
       />
-      <button onClick={createNote}>Create Note</button>
+      
+      <button onClick={createNote}>Create</button>
       <div style={{marginBottom: 30}}>
       </div>
 
