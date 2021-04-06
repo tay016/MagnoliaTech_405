@@ -20,6 +20,9 @@ function MakeHierarchy() {
   async function fetchLevels() {
     const apiData = await API.graphql({ query: listLevels });
     const levelsFromAPI = apiData.data.listLevels.items;
+    var select = document.getElementById("levelsDropdown");
+    levelsFromAPI.forEach(i =>
+      select.options[select.options.length] = new Option(levelsFromAPI[i], i));
     await Promise.all(levelsFromAPI.map(async level => {
       return level;
     }))
@@ -31,10 +34,6 @@ function MakeHierarchy() {
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
-    var select = document.getElementById("levelsDropdown");
-    for(i in lists) {
-      select.options[select.options.length] = new Option(lists[i], i);
-    }
   }
 
   async function deleteLevel({ id }) {
