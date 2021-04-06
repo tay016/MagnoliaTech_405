@@ -4,7 +4,7 @@ import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listLevels } from './graphql/queries';
-import { DropdownInput } from "react-dropdown-input";
+import { DropdownInput } from "react-dropdown";
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
