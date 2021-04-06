@@ -65,7 +65,7 @@ function MakeHierarchy() {
           value={formData.description}
         />
 
-        <select id='levelsDropdown' style="width:150px">
+        <select id='levelsDropdown'>
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
