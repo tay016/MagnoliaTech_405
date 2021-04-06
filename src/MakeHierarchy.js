@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listLevels } from './graphql/queries';
+import { DropdownInput } from "react-dropdown-input";
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
@@ -44,7 +45,7 @@ function MakeHierarchy() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{marginBottom: 30}}>
       <h1>Magnolia Technologies Hierarchy Application</h1>
       <Link to="/">
         <button>View Hierarchy</button>
@@ -62,7 +63,8 @@ function MakeHierarchy() {
           value={formData.description}
         />
 
-        <input
+        <DropdownInput
+          options={levels.map(level => level.name)}
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
