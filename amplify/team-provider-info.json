@@ -1,0 +1,20 @@
+{
+  "kelleytina": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-magnoliatech405-kelleytina-215052-authRole",
+      "UnauthRoleArn": "arn:aws:iam::605126939097:role/amplify-magnoliatech405-kelleytina-215052-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::605126939097:role/amplify-magnoliatech405-kelleytina-215052-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-magnoliatech405-kelleytina-215052-deployment",
+      "UnauthRoleName": "amplify-magnoliatech405-kelleytina-215052-unauthRole",
+      "StackName": "amplify-magnoliatech405-kelleytina-215052",
+      "StackId": "arn:aws:cloudformation:us-east-1:605126939097:stack/amplify-magnoliatech405-kelleytina-215052/d50f2f90-90d8-11eb-b10b-12909bffa46d",
+      "AmplifyAppId": "d3o65280w1r6x2"
+    },
+    "categories": {
+      "auth": {
+        "MagnoliaTech405": {}
+      }
+    }
+  }
+}
