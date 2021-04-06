@@ -44,7 +44,9 @@ function MakeHierarchy() {
 
   return (
     <div className="App">
-      <h1>Magnolia Technologies Hierarchy Application </h1>
+      <Link to="/">
+      <h1>Magnolia Technologies Hierarchy Application</h1>
+      </Link>
       <input
         onChange={e => setFormData({ ...formData, 'name': e.target.value})}
         placeholder="Level name"

@@ -14,7 +14,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magnolia Technologies Hierarchy Application </h1>
+      <Link to="/">
+      <h1>Magnolia Technologies Hierarchy Application</h1>
+      </Link>
       <Link to="/makeHierarchy">
         <button>Create Level</button>
       </Link>
