@@ -11,7 +11,7 @@
     "bootstrap": "^4.6.0",
     "file-saver": "^2.0.5",
     "react": "^17.0.1",
-    "react-addons": "*",
+    "react-addons": "https://registry.npmjs.org/react-addons/-/react-addons-0.8.0.tgz",
     "react-bootstrap": "^1.5.2",
     "react-csv": "^2.0.3",
     "react-dom": "^17.0.1",
