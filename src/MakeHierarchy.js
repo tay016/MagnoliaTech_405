@@ -4,7 +4,6 @@ import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listLevels } from './graphql/queries';
-import { Select } from 'react-select';
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
@@ -32,6 +31,10 @@ function MakeHierarchy() {
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
+    var select = document.getElementById("levelsDropdown");
+    for(i in lists) {
+      select.options[select.options.length] = new Option(lists[i], i);
+    }
   }
 
   async function deleteLevel({ id }) {
@@ -63,12 +66,11 @@ function MakeHierarchy() {
           value={formData.description}
         />
 
-        <Select
-          options={levels.map(level => levels.name)}
+        <select id='levelsDropdown'>
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
-        />
+        </select>
       
         <button onClick={createLevel}>Create</button>
       </div>
