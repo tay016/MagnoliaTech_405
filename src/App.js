@@ -14,9 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <Link to="/" style={{ textDecoration: 'none' }}>
       <h1>Magnolia Technologies Hierarchy Application</h1>
-      </Link>
       <Link to="/makeHierarchy">
         <button>Create Level</button>
       </Link>
