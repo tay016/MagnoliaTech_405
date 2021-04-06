@@ -9,6 +9,19 @@ import { ExportCSV } from './ExportCSV';
 const initialFormState = { name: '', description: '' }
 
 function App() {
+  // //KT test
+  // return(
+  //   <div cassName="App">
+  //     <header>
+  //       <img src={logo} className="App-logo" alt="logo" />
+  //       <p>
+  //         Edit <code>src/App.js</code> and save to reload.
+  //       </p>
+  //       <AmplifysignOut/>
+  //     </header>
+  //   </div>
+  // )
+
   const [notes, setNotes] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
