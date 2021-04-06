@@ -22,7 +22,7 @@ function MakeHierarchy() {
     await Promise.all(levelsFromAPI.map(async level => {
       return level;
     }))
-    setNotes(apiData.data.listLevels.items);
+    setLevels(apiData.data.listLevels.items);
   }
 
   async function createLevel() {
@@ -62,7 +62,7 @@ function MakeHierarchy() {
         value={formData.parentID}
       />
       
-      <button onClick={createNote}>Create</button>
+      <button onClick={createLevel}>Create</button>
       <div style={{marginBottom: 30}}>
       </div>
 

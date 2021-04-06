@@ -8,10 +8,9 @@ import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation 
 import { ExportCSV } from './ExportCSV';
 import MakeHierarchy from './MakeHierarchy';
 
-const initialFormState = { name: '', description: '' }
-const levels = useState([]);
 
 function App() {
+  const levels = useState([]);
 
   return (
     <div className="App">
