@@ -53,7 +53,7 @@ function MakeHierarchy() {
         <button>View Hierarchy</button>
       </Link>
       
-      <div style={{marginBottom: 30}}>
+      <div style={{marginTop: 30}}>
         <input
           onChange={e => setFormData({ ...formData, 'name': e.target.value})}
           placeholder="Level name"
@@ -65,7 +65,7 @@ function MakeHierarchy() {
           value={formData.description}
         />
 
-        <select id='levelsDropdown'>
+        <select id='levelsDropdown' style="width:150px">
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
