@@ -10,6 +10,13 @@ import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '', parentID: '' }
 
+/*
+options={levels.map(level => level.name)}
+          onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
+          placeholder="Level parent"
+          value={formData.parentID}
+*/
+
 function MakeHierarchy() {
   const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
@@ -64,10 +71,7 @@ function MakeHierarchy() {
         />
 
         <Dropdown
-          options={levels.map(level => level.name)}
-          onChange={this._onSelect}
-          placeholder="Level parent"
-          value={formData.parentID}
+          
         />
 
         <button onClick={createLevel}>Create</button>
