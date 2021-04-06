@@ -63,7 +63,12 @@ function MakeHierarchy() {
           value={formData.description}
         />
 
-        
+        <Dropdown
+          options={levels.map(level => level.name)}
+          onChange={this._onSelect}
+          placeholder="Level parent"
+          value={formData.parentID}
+        />
 
         <button onClick={createLevel}>Create</button>
       </div>
