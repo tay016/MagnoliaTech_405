@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.8.1",
     "aws-amplify": "^3.3.22",
     "bootstrap": "^4.6.0",
+    "classnames": "^2.3.1",
     "file-saver": "^2.0.5",
     "react": "^17.0.1",
     "react-addons": "https://registry.npmjs.org/react-addons/-/react-addons-0.8.0.tgz",
