@@ -2,56 +2,44 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { listNotes } from './graphql/queries';
-import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
+import { listLevels } from './graphql/queries';
+import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
-const initialFormState = { name: '', description: '' }
+const initialFormState = { name: '', description: '', parentID: '' }
 
 function MakeHierarchy() {
-  const [notes, setNotes] = useState([]);
+  const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
-    fetchNotes();
+    fetchLevels();
   }, []);
 
-  async function fetchNotes() {
-    const apiData = await API.graphql({ query: listNotes });
-    const notesFromAPI = apiData.data.listNotes.items;
-    await Promise.all(notesFromAPI.map(async note => {
-      if (note.image) {
-        const image = await Storage.get(note.image);
-        note.image = image;
-      }
-      return note;
+  async function fetchLevels() {
+    const apiData = await API.graphql({ query: listLevels });
+    const levelsFromAPI = apiData.data.listLevels.items;
+    await Promise.all(levelsFromAPI.map(async level => {
+      return level;
     }))
-    setNotes(apiData.data.listNotes.items);
+    setLevels(apiData.data.listLevels.items);
   }
 
-  async function createNote() {
+  async function createLevel() {
     if (!formData.name || !formData.description) return;
-    await API.graphql({ query: createNoteMutation, variables: { input: formData } });
-    if (formData.image) {
-      const image = await Storage.get(formData.image);
-      formData.image = image;
-    }
-    setNotes([ ...notes, formData ]);
+    await API.graphql({ query: createLevelMutation, variables: { input: formData } });
+    setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
   }
 
-  async function deleteNote({ id }) {
-    const newNotesArray = notes.filter(note => note.id !== id);
-    setNotes(newNotesArray);
-    await API.graphql({ query: deleteNoteMutation, variables: { input: { id } }});
+  async function deleteLevel({ id }) {
+    const newLevelsArray = levels.filter(level => level.id !== id);
+    setLevels(newLevelsArray);
+    await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
   }
   
   async function onChange(e) {
-    if (!e.target.files[0]) return
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: file.name });
-    await Storage.put(file.name, file);
-    fetchNotes();
+    fetchLevels();
   }
 
   return (
@@ -59,20 +47,22 @@ function MakeHierarchy() {
       <h1>Magnolia Technologies Hierarchy Application </h1>
       <input
         onChange={e => setFormData({ ...formData, 'name': e.target.value})}
-        placeholder="Note name"
+        placeholder="Level name"
         value={formData.name}
       />
       <input
         onChange={e => setFormData({ ...formData, 'description': e.target.value})}
-        placeholder="Note description"
+        placeholder="Level description"
         value={formData.description}
       />
 
       <input
-        type="file"
-        onChange={onChange}
+        onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
+        placeholder="Level parent"
+        value={formData.parentID}
       />
-      <button onClick={createNote}>Create Note</button>
+      
+      <button onClick={createLevel}>Create</button>
       <div style={{marginBottom: 30}}>
       </div>
 
