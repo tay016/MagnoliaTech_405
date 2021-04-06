@@ -49,25 +49,26 @@ function MakeHierarchy() {
       <Link to="/">
         <button>View Hierarchy</button>
       </Link>
-      <input
-        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
-        placeholder="Level name"
-        value={formData.name}
-      />
-      <input
-        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
-        placeholder="Level description"
-        value={formData.description}
-      />
-
-      <input
-        onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
-        placeholder="Level parent"
-        value={formData.parentID}
-      />
       
-      <button onClick={createLevel}>Create</button>
       <div style={{marginBottom: 30}}>
+        <input
+          onChange={e => setFormData({ ...formData, 'name': e.target.value})}
+          placeholder="Level name"
+          value={formData.name}
+        />
+        <input
+          onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+          placeholder="Level description"
+          value={formData.description}
+        />
+
+        <input
+          onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
+          placeholder="Level parent"
+          value={formData.parentID}
+        />
+      
+        <button onClick={createLevel}>Create</button>
       </div>
 
       <AmplifySignOut />
