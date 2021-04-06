@@ -6,7 +6,7 @@ import { listLevels } from './graphql/queries';
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
-const initialFormState = { name: '', description: '' }
+const initialFormState = { name: '', description: '', parentID: '' }
 
 function MakeHierarchy() {
   const [levels, setLevels] = useState([]);
@@ -18,12 +18,8 @@ function MakeHierarchy() {
 
   async function fetchLevels() {
     const apiData = await API.graphql({ query: listLevels });
-    const notesFromAPI = apiData.data.listLevels.items;
+    const levelsFromAPI = apiData.data.listLevels.items;
     await Promise.all(levelsFromAPI.map(async level => {
-      if (level.image) {
-        const image = await Storage.get(level.image);
-        level.image = image;
-      }
       return level;
     }))
     setNotes(apiData.data.listLevels.items);
@@ -32,10 +28,6 @@ function MakeHierarchy() {
   async function createLevel() {
     if (!formData.name || !formData.description) return;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
-    if (formData.image) {
-      const image = await Storage.get(formData.image);
-      formData.image = image;
-    }
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
   }
@@ -47,10 +39,6 @@ function MakeHierarchy() {
   }
   
   async function onChange(e) {
-    if (!e.target.files[0]) return
-    const file = e.target.files[0];
-    setFormData({ ...formData, image: file.name });
-    await Storage.put(file.name, file);
     fetchLevels();
   }
 

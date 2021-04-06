@@ -9,6 +9,7 @@ import { ExportCSV } from './ExportCSV';
 import MakeHierarchy from './MakeHierarchy';
 
 const initialFormState = { name: '', description: '' }
+const levels = useState([]);
 
 function App() {
 
@@ -24,9 +25,6 @@ function App() {
           <div key={level.id || level.name}>
             <h2>{level.name}</h2>
             <p>{level.description}</p>
-            {
-              level.image && <img src={level.image} style={{width: 400}} alt="Error"/>
-            }
           </div>
         ))
       }
