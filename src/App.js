@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magnolia Technologies Hierarchy Application </h1>
+      <h1>Magnolia Technologies Hierarchy Application</h1>
       <Link to="/makeHierarchy">
         <button>Create Level</button>
       </Link>

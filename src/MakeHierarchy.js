@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from "react-router-dom";
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -19,6 +20,9 @@ function MakeHierarchy() {
   async function fetchLevels() {
     const apiData = await API.graphql({ query: listLevels });
     const levelsFromAPI = apiData.data.listLevels.items;
+    var select = document.getElementById("levelsDropdown");
+    levelsFromAPI.forEach(i =>
+      select.options[select.options.length] = new Option(levelsFromAPI[i], i));
     await Promise.all(levelsFromAPI.map(async level => {
       return level;
     }))
@@ -43,27 +47,31 @@ function MakeHierarchy() {
   }
 
   return (
-    <div className="App">
-      <h1>Magnolia Technologies Hierarchy Application </h1>
-      <input
-        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
-        placeholder="Level name"
-        value={formData.name}
-      />
-      <input
-        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
-        placeholder="Level description"
-        value={formData.description}
-      />
-
-      <input
-        onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
-        placeholder="Level parent"
-        value={formData.parentID}
-      />
+    <div className="App" style={{marginBottom: 30}}>
+      <h1>Magnolia Technologies Hierarchy Application</h1>
+      <Link to="/">
+        <button>View Hierarchy</button>
+      </Link>
       
-      <button onClick={createLevel}>Create</button>
-      <div style={{marginBottom: 30}}>
+      <div style={{marginTop: 30}}>
+        <input
+          onChange={e => setFormData({ ...formData, 'name': e.target.value})}
+          placeholder="Level name"
+          value={formData.name}
+        />
+        <input
+          onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+          placeholder="Level description"
+          value={formData.description}
+        />
+
+        <select id='levelsDropdown'>
+          onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
+          placeholder="Level parent"
+          value={formData.parentID}
+        </select>
+      
+        <button onClick={createLevel}>Create</button>
       </div>
 
       <AmplifySignOut />
