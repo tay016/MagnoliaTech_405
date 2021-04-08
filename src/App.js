@@ -84,6 +84,7 @@ function App() {
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
+          <option value="{'Root': 0}" ></option>
         </select>
       
         <button onClick={createLevel()}>Create</button>
