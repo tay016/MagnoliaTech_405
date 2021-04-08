@@ -24,10 +24,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "layer": {
-                    "name": "layer",
+                "parentID": {
+                    "name": "parentID",
                     "isArray": false,
-                    "type": "Int",
+                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 }
@@ -60,5 +60,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4e995fa6581f819eaa990adde737b5d9"
+    "version": "1dcdb1b007a34bad08fd2479707c6b73"
 };
