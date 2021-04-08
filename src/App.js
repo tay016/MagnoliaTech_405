@@ -39,7 +39,6 @@ function App() {
 
   async function createLevel() {
     if (!formData.name || !formData.description) return;
-    console.log("all defined");
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
@@ -52,12 +51,15 @@ function App() {
   }
 
   function updateParents() {
-    console.log('updateParents called');
+    console.log("update called")
     levelDropdown = document.getElementById('levelsDropdown');
-    levelDropdown.options.length = 1;
     levelDropdown.options[0] = new Option("Root", 0);
+    var optionIds = levelDropdown.options.map(option => option.value)
     levels.forEach(level => {
-      levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
+      if (!optionIds.contains(level.id)) {
+        levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
+      }
+      
     })
   }
   
