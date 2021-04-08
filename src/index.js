@@ -15,7 +15,6 @@ ReactDOM.render(
     <Router>
       <Switch>
       <Route exact path="/" component={App}/>
-      <Route path="/makeHierarchy" component={MakeHierarchy}/>
       </Switch>
     </Router>
   </React.StrictMode>,
