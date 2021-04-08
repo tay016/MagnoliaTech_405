@@ -88,7 +88,7 @@ function App() {
           <option value= "0">Root</option>
         </select>
       
-        <button onClick={createLevel()}>Create</button>
+        <button onClick={createLevel}>Create</button>
       </div>
 
       <div className="App">
