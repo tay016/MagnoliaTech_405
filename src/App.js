@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import './App.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { ExportCSV } from './ExportCSV';
-import { MakeHierarchy, levels } from './MakeHierarchy';
+import { MakeHierarchy, levels} from './MakeHierarchy';
 
 
 function App() {
