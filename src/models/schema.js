@@ -21,7 +21,7 @@ export const schema = {
                     "name": "description",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "parentID": {
