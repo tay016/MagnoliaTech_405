@@ -54,12 +54,12 @@ function App() {
     console.log("update called")
     levelDropdown = document.getElementById('levelsDropdown');
     levelDropdown.options[0] = new Option("Root", 0);
-    var optionIds = levelDropdown.options.map(option => option.value)
+    var optionIds = []
+    levelDropdown.options.foreach(option => optionIds.push(option.value))
     levels.forEach(level => {
       if (!optionIds.contains(level.id)) {
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
       }
-      
     })
   }
   
