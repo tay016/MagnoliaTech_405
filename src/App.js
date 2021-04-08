@@ -49,6 +49,14 @@ function App() {
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
     levelDropdown.options = levels.map(level => level.name)
   }
+
+  async function updateParents() {
+    var levelDropdown = document.getElementById('levelsDropdown');
+    levelDropdown.options[0] = new Option("Root", 0);
+    levels.forEach(level => {
+      levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
+    })
+  }
   
   async function onChange(e) {
     fetchLevels();
@@ -96,8 +104,5 @@ function App() {
     </div>
   </div>
   )}
-
-var levelDropdown = document.getElementById('levelsDropdown');
-levelDropdown.options[0] = new Option("Root", 0);
 
 export default withAuthenticator(App);
