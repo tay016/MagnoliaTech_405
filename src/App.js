@@ -7,6 +7,7 @@ import { listLevels } from './graphql/queries';
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
+const initialFormState = { name: '', description: '', parentID: '' }
 
 function App() {
 
