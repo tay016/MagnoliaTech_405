@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './index.css';
 import App from './App';
-import MakeHierarchy from './MakeHierarchy';
 import reportWebVitals from './reportWebVitals';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
@@ -15,7 +14,6 @@ ReactDOM.render(
     <Router>
       <Switch>
       <Route exact path="/" component={App}/>
-      <Route path="/makeHierarchy" component={MakeHierarchy}/>
       </Switch>
     </Router>
   </React.StrictMode>,

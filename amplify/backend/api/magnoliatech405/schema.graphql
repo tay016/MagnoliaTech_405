@@ -1,7 +1,7 @@
 type Level @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
-  description: String
-  parentID: ID
+  description: String!
+  layer: Int
 }
  
