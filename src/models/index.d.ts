@@ -8,7 +8,7 @@ export declare class Level {
   readonly id: string;
   readonly name: string;
   readonly description: string;
-  readonly parentID?: string;
+  readonly layer?: number;
   constructor(init: ModelInit<Level>);
   static copyOf(source: Level, mutator: (draft: MutableModel<Level>) => MutableModel<Level> | void): Level;
 }

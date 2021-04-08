@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
+import express from 'express';
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
@@ -7,13 +8,24 @@ import { listLevels } from './graphql/queries';
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
-const initialFormState = { name: '', description: '', parentID: '' }
+const app = express();
+app.set("view engine", "ejs");
+
+const initialFormState = { name: '', description: '', parentID: '' };
 
 function App() {
 
   const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
   const levelDropdown = document.getElementById('levelsDropdown')
+  const layerMap = {
+    0: 'h1',
+    1: 'h2',
+    2: 'h3',
+    3: 'h4',
+    4: 'h5',
+    5: 'h6'
+  }
 
   useEffect(() => {
     fetchLevels();
@@ -31,19 +43,19 @@ function App() {
     setLevels(apiData.data.listLevels.items);
   }
 
-  async function createLevel() {
+  async function createLevel(layer) {
     if (!formData.name || !formData.description) return;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
-    levelDropdown.options = levels.map(level => ( level.name));
+    
   }
 
   async function deleteLevel({ id }) {
     const newLevelsArray = levels.filter(level => level.id !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
-    levelDropdown.options = levels.map(level => ( level.name));
+    levelDropdown.options = levels.map(level => level.name);
   }
   
   async function onChange(e) {
@@ -72,7 +84,7 @@ function App() {
           value={formData.parentID}
         </select>
       
-        <button onClick={createLevel}>Create</button>
+        <button onClick={createLevel(0)}>Create</button>
       </div>
 
       <div className="App">
@@ -80,7 +92,25 @@ function App() {
       {
         levels.map(level => (
           <div key={level.id || level.name}>
-            <h2>{level.name}</h2>
+            <% if level.layer == 0 { %>
+              <h1>{level.name}</h1>
+            <% } %>
+            <% if level.layer == 1 { %>
+              <h2>{level.name}</h2>
+            <% } %>
+            <% if level.layer == 2 { %>
+              <h3>{level.name}</h3>
+            <% } %>
+            <% if level.layer == 3 { %>
+              <h4>{level.name}</h4>
+            <% } %>
+            <% if level.layer == 4 { %>
+              <h5>{level.name}</h5>
+            <% } %>
+            <% if level.layer == 5 { %>
+              <h6>{level.name}</h6>
+            <% } %>
+            <button onClick={createLevel(++level.layer)}>Add</button>
             <p>{level.description}</p>
             <button onClick={() => deleteLevel(level)}>Delete level</button>
           </div>
