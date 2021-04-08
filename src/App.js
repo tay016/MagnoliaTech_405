@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
-import express from 'express';
 import './App.css';
 import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
