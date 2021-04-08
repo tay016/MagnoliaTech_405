@@ -37,8 +37,8 @@ function App() {
   }
 
   async function createLevel() {
-    console.log('createLevel called');
     if (!formData.name || !formData.description || (!formData.parentID)) return;
+    console.log("all defined");
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
