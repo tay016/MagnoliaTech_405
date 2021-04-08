@@ -36,7 +36,7 @@ export class HierarchyTree {
     }
 
     preorder(level) {
-        var currentLevel = !node ? this.root : level;
+        var currentLevel = !level ? this.root : level;
         var layer = 0;
         if(currentLevel) {
             this.write(currentLevel, layer);
@@ -48,7 +48,7 @@ export class HierarchyTree {
     }
 
     searchNode(data, level) {
-        var currentLevel = !node ? this.root : level;
+        var currentLevel = !level ? this.root : level;
         if(currentLevel) {
             for(var i = 0; i < currentLevel.children.length; i++) {
                 if(currentLevel.children[i].data == data) {

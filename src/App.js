@@ -17,6 +17,7 @@ function App() {
   
   var hierarchy = new HierarchyTree("Hierarchy");
   var levelDropdown = document.getElementById('levelsDropdown');
+  levelDropdown.options[0] = new Option("Root", 0);
 
 
   useEffect(() => {
