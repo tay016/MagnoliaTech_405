@@ -16,6 +16,7 @@ function App() {
   const [formData, setFormData] = useState(initialFormState);
   
   var hierarchy = new HierarchyTree("Hierarchy");
+  var levelDropdown;
 
 
 
@@ -36,22 +37,23 @@ function App() {
   }
 
   async function createLevel() {
+    levelDropdown = document.getElementById('levelsDropdown');
     if (!formData.name || !formData.description || (!formData.parentID && typeof levelDropdown !== 'undefined')) return;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
-    updateParents();
+    //updateParents();
   }
 
   async function deleteLevel({ id }) {
+    levelDropdown = document.getElementById('levelsDropdown');
     const newLevelsArray = levels.filter(level => level.id !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
-    updateParents();
+    //updateParents();
   }
 
   async function updateParents() {
-    var levelDropdown = document.getElementById('levelsDropdown');
     levelDropdown.options = [];
     levelDropdown.options[0] = new Option("Root", 0);
     levels.forEach(level => {
@@ -67,18 +69,18 @@ function App() {
     <div className="App" style={{marginBottom: 30}}>
       <h1>Magnolia Technologies Hierarchy Application</h1>
       <div style={{marginTop: 30}}>
-        <input style={{margin: 15}}
+        <input style={{margin: 5}}
           onChange={e => setFormData({ ...formData, 'name': e.target.value})}
           placeholder="Level name"
           value={formData.name}
         />
-        <input style={{margin: 15}}
+        <input style={{margin: 5}}
           onChange={e => setFormData({ ...formData, 'description': e.target.value})}
           placeholder="Level description"
           value={formData.description}
         />
 
-        <select id='levelsDropdown' style={{margin: 15}}>
+        <select id='levelsDropdown' style={{margin: 5}}>
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
