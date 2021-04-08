@@ -10,7 +10,7 @@ import { ExportCSV } from './ExportCSV';
 const initialFormState = { name: '', description: '', parentID: '' }
 
 function MakeHierarchy() {
-  const [levels, setLevels] = useState([]);
+  export const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
@@ -79,4 +79,4 @@ function MakeHierarchy() {
   );
 }
 
-export default levels;
+export default withAuthenticator(MakeHierarchy);
