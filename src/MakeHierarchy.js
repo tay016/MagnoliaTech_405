@@ -80,4 +80,3 @@ function MakeHierarchy() {
 }
 
 export default levels;
-export default withAuthenticator(MakeHierarchy);
