@@ -8,9 +8,9 @@ import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation 
 import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '', parentID: '' }
-export const [levels, setLevels] = useState([]);
 
-function MakeHierarchy() {
+export function MakeHierarchy() {
+  const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
