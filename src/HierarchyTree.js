@@ -2,6 +2,7 @@ import React from 'react';
 
 export class HierarchyLevel {
     constructor(data) {
+
         this.data = data;
         this.parent = null;
         this.children = []

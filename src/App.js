@@ -75,7 +75,11 @@ function App() {
       <h1>Magnolia Technologies Hierarchy Application</h1>
       <div style={{marginTop: 30}}>
         <input style={{margin: 5}}
-          onChange={e => setFormData({ ...formData, 'name': e.target.value})}
+          onChange={e => {
+            setFormData({ ...formData, 'name': e.target.value})
+            updateParents();
+            }
+          }
           placeholder="Level name"
           value={formData.name}
         />
