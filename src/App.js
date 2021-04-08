@@ -22,7 +22,6 @@ function App() {
 
   useEffect(() => {
     fetchLevels();
-    updateParents();
   }, []);
 
   async function fetchLevels() {
@@ -59,10 +58,10 @@ function App() {
     console.log(optionIds);
     levels.forEach(level => {
       console.log("levels for each");
-      //if (!optionIds.contains(level.id)) {
+      if (!optionIds.contains(level.id)) {
         console.log("adding");
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
-      //}
+      }
       console.log(levelDropdown.options);
     })
   }
@@ -87,7 +86,11 @@ function App() {
         />
 
         <select id='levelsDropdown' style={{margin: 5}}>
-          onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
+          onChange={e => {
+            setFormData({ ...formData, 'parentID': e.target.value});
+            updateParents();
+            }
+          }
           placeholder="Level parent"
           value={formData.parentID}
           <option value= "0">Root</option>
