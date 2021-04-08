@@ -8,24 +8,12 @@ import { listLevels } from './graphql/queries';
 import { createLevel as createLevelMutation, deleteLevel as deleteLevelMutation } from './graphql/mutations';
 import { ExportCSV } from './ExportCSV';
 
-const app = express();
-app.set("view engine", "ejs");
-
 const initialFormState = { name: '', description: '', parentID: '' };
 
 function App() {
 
   const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
-  const levelDropdown = document.getElementById('levelsDropdown')
-  const layerMap = {
-    0: 'h1',
-    1: 'h2',
-    2: 'h3',
-    3: 'h4',
-    4: 'h5',
-    5: 'h6'
-  }
 
   useEffect(() => {
     fetchLevels();
@@ -92,24 +80,7 @@ function App() {
       {
         levels.map(level => (
           <div key={level.id || level.name}>
-            <% if level.layer == 0 { %>
-              <h1>{level.name}</h1>
-            <% } %>
-            <% if level.layer == 1 { %>
-              <h2>{level.name}</h2>
-            <% } %>
-            <% if level.layer == 2 { %>
-              <h3>{level.name}</h3>
-            <% } %>
-            <% if level.layer == 3 { %>
-              <h4>{level.name}</h4>
-            <% } %>
-            <% if level.layer == 4 { %>
-              <h5>{level.name}</h5>
-            <% } %>
-            <% if level.layer == 5 { %>
-              <h6>{level.name}</h6>
-            <% } %>
+            <h2>{level.name}</h2>
             <button onClick={createLevel(++level.layer)}>Add</button>
             <p>{level.description}</p>
             <button onClick={() => deleteLevel(level)}>Delete level</button>
