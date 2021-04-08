@@ -36,7 +36,7 @@ function App() {
   }
 
   async function createLevel() {
-    if (!formData.name || !formData.description || !formData.parentID) return;
+    if (!formData.name || !formData.description || !formData.parentID && levelDropdown) return;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
@@ -67,18 +67,18 @@ function App() {
     <div className="App" style={{marginBottom: 30}}>
       <h1>Magnolia Technologies Hierarchy Application</h1>
       <div style={{marginTop: 30}}>
-        <input
+        <input style={{margin: 15}}
           onChange={e => setFormData({ ...formData, 'name': e.target.value})}
           placeholder="Level name"
           value={formData.name}
         />
-        <input
+        <input style={{margin: 15}}
           onChange={e => setFormData({ ...formData, 'description': e.target.value})}
           placeholder="Level description"
           value={formData.description}
         />
 
-        <select id='levelsDropdown'>
+        <select id='levelsDropdown' style={{margin: 15}}>
           onChange={e => setFormData({ ...formData, 'parentID': e.target.value})}
           placeholder="Level parent"
           value={formData.parentID}
