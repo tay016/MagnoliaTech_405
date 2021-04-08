@@ -36,7 +36,7 @@ function App() {
     setLevels(apiData.data.listLevels.items);
   }
 
-  async function createLevel() {
+  function createLevel() {
     if (!formData.name || !formData.description) return;
     console.log("all defined");
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
