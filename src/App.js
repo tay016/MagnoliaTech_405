@@ -37,6 +37,7 @@ function App() {
   }
 
   async function createLevel() {
+    console.log('createLevel called');
     levelDropdown = document.getElementById('levelsDropdown');
     if (!formData.name || !formData.description || (!formData.parentID)) return;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
@@ -54,6 +55,7 @@ function App() {
   }
 
   function updateParents() {
+    console.log('updateParents called');
     levelDropdown.options = [];
     levelDropdown.options[0] = new Option("Root", 0);
     levels.forEach(level => {
