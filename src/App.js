@@ -55,10 +55,13 @@ function App() {
     levelDropdown.options[0] = new Option("Root", 0);
     var optionIds = []
     Array.prototype.forEach.call(levelDropdown.options ,option => optionIds.push(option.value))
+    console.log(optionIds);
     levels.forEach(level => {
       if (!optionIds.contains(level.id)) {
+        console.log("adding");
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
       }
+      console.log(levelDropdown.options);
     })
   }
   
