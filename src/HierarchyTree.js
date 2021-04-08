@@ -6,6 +6,27 @@ export class HierarchyLevel {
         this.parent = null;
         this.children = []
     }
+    
+    setParentLevel(level) {
+        this.parent = level;
+    }
+
+    getParentLevel() {
+        return this.parent;
+    }
+
+    addChild(level) {
+        level.setParentLevel(this);
+        this.children[this.children.length] = level;
+    }
+
+    getChildren() {
+        return this.children;
+    }
+
+    removeChildren() {
+        this.children = []
+    }
 }
 
 export class HierarchyTree {
@@ -14,25 +35,37 @@ export class HierarchyTree {
         this.root = node;
     }
 
-    preorder(node) {
-        var currentNode = !node ? this.root : node;
+    preorder(level) {
+        var currentLevel = !node ? this.root : level;
         var layer = 0;
-        if(currentNode) {
-            this.write(currentNode, layer);
-            for(var i = 0; i < currentNode.children.length; i++) {
-                currentNode.children.length &&this.preorder(currentNode.children[i]);
+        if(currentLevel) {
+            this.write(currentLevel, layer);
+            for(var i = 0; i < currentLevel.children.length; i++) {
+                currentLevel.children.length && this.preorder(currentLevel.children[i]);
             }
             layer++;
         }
     }
 
-    write(node, layer) {
+    searchNode(data, level) {
+        var currentLevel = !node ? this.root : level;
+        if(currentLevel) {
+            for(var i = 0; i < currentLevel.children.length; i++) {
+                if(currentLevel.children[i].data == data) {
+                    return i;
+                }
+                currentLevel.children.length && this.preorder(currentLevel.children[i]);
+            }
+        }
+    }
+
+    write(level, layer) {
         var tabs = 0;
         for (var i = 0; i < layer; i++) {
             tabs += "\t"
         }
         return (
-            <h2>{tabs + node.data}</h2>
+            <h2>{tabs + level.data}</h2>
         )
     }
 

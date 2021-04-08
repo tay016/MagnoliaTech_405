@@ -14,6 +14,9 @@ function App() {
 
   const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
+  
+  var hierarchy = new HierarchyTree("Hierarchy");
+  var levelDropdown = document.getElementById('levelsDropdown');
 
 
   useEffect(() => {
@@ -37,12 +40,14 @@ function App() {
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
+    levelDropdown.options = levels.map(level => level.name)
   }
 
   async function deleteLevel({ id }) {
     const newLevelsArray = levels.filter(level => level.id !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
+    levelDropdown.options = levels.map(level => level.name)
   }
   
   async function onChange(e) {
