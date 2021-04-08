@@ -43,7 +43,6 @@ function App() {
     const newLevelsArray = levels.filter(level => level.id !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
-    levelDropdown.options = levels.map(level => level.name);
   }
   
   async function onChange(e) {
