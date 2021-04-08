@@ -16,8 +16,7 @@ function App() {
   const [formData, setFormData] = useState(initialFormState);
   
   var hierarchy = new HierarchyTree("Hierarchy");
-  var levelDropdown = document.getElementById('levelsDropdown');
-  levelDropdown.options[0] = new Option("Root", 0);
+
 
 
   useEffect(() => {
@@ -97,5 +96,8 @@ function App() {
     </div>
   </div>
   )}
+
+var levelDropdown = document.getElementById('levelsDropdown');
+levelDropdown.options[0] = new Option("Root", 0);
 
 export default withAuthenticator(App);
