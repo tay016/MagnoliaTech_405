@@ -66,7 +66,6 @@ function App() {
   return (
     <div className="App" style={{marginBottom: 30}}>
       <h1>Magnolia Technologies Hierarchy Application</h1>
-      {updateParents()}
       <div style={{marginTop: 30}}>
         <input
           onChange={e => setFormData({ ...formData, 'name': e.target.value})}
