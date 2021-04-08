@@ -11,7 +11,7 @@ const initialFormState = { name: '', description: '', parentID: '' }
 export var [levels, setLevels] = [];
 
 function MakeHierarchy() {
-  [levels, setLevels] = useState([]);
+  const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {

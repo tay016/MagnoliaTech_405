@@ -79,6 +79,7 @@ function App() {
           <div key={level.id || level.name}>
             <h2>{level.name}</h2>
             <p>{level.description}</p>
+            <button onClick={() => deleteLevel(level)}>Delete level</button>
           </div>
         ))
       }
