@@ -41,6 +41,9 @@ function App() {
     if (!formData.name || !formData.description) return;
     var idVal = Math.floor(Math.random() * 1000)
     formData['id'] = "ID" + idVal + formData.name;
+    if (!formData.parentID) {
+      formData.parentID = "ROOT";
+    }
     console.log("PARENT:" + formData.parentID);
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
