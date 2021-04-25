@@ -35,6 +35,7 @@ function App() {
       return level;
     }))
     setLevels(apiData.data.listLevels.items);
+    updateParents();
   }
 
   async function createLevel() {
@@ -46,18 +47,11 @@ function App() {
     }
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
-    updateParents();
     setFormData(initialFormState);
   }
 
   async function deleteLevel(id) {
-    levels.forEach(level => {
-      if (level.parentID == id) {
-        console.log("child level found");
-        deleteLevel(level.id);
-      }
-    })
-    const newLevelsArray = levels.filter(level => level.id !== id);
+    const newLevelsArray = levels.filter(level => level.id !== id && level.parentID !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
   }

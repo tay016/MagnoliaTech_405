@@ -1,5 +1,6 @@
 import React from 'react';
 
+// 404 Group can use this tree class to properly format the different hierarchy levels
 export class HierarchyLevel {
     constructor(data) {
 
