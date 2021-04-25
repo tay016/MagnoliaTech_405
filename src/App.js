@@ -35,7 +35,6 @@ function App() {
       return level;
     }))
     setLevels(apiData.data.listLevels.items);
-    updateParents();
   }
 
   async function createLevel() {
@@ -47,6 +46,7 @@ function App() {
     }
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
+    updateParents();
     setFormData(initialFormState);
   }
 
