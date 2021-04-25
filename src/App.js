@@ -17,7 +17,8 @@ function App() {
   
   var hierarchy = new HierarchyTree("Hierarchy");
   var levelDropdown;
-  var optionIds = []
+  var optionIds = [];
+  console.log("optionIds init");
 
 
 
@@ -54,10 +55,9 @@ function App() {
     levelDropdown = document.getElementById('levelsDropdown');
     levelDropdown.options[0] = new Option("Root", 0);
     //Array.prototype.forEach.call(levelDropdown.options ,option => optionIds.push(option.value))
-    console.log(optionIds);
     levels.forEach(level => {
-      console.log(level.id);
-      console.log(optionIds);
+      console.log("Current ID: " + level.id);
+      console.log("Ids: " + optionIds);
       if (!optionIds.includes(level.id)) {
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
         optionIds.push(level.id)
