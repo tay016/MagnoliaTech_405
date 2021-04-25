@@ -51,15 +51,15 @@ function App() {
   }
 
   async function deleteLevel(id) {
-    const newLevelsArray = levels.filter(level => level.id !== id);
-    setLevels(newLevelsArray);
-    await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
     levels.forEach(level => {
       if (level.parentID == id) {
         console.log("child level found");
         deleteLevel(level.id);
       }
     })
+    const newLevelsArray = levels.filter(level => level.id !== id);
+    setLevels(newLevelsArray);
+    await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
   }
 
   function updateParents() {
