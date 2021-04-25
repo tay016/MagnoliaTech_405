@@ -111,8 +111,8 @@ function App() {
           <div key={level.id || level.name}>
             <h2>{level.name}</h2>
             <p>{level.description}</p>
-            <p>Test: {level.id}</p>
-            <p>Test: {level.parentID}</p>
+            <p>ID: {level.id}</p>
+            <p>ParentID: {level.parentID}</p>
             <button onClick={() => deleteLevel(level.id)}>Delete level</button>
           </div>
         ))
