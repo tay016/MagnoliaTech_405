@@ -46,7 +46,7 @@ function App() {
     setFormData(initialFormState);
   }
 
-  async function deleteLevel({ id }) {
+  async function deleteLevel(id) {
     const newLevelsArray = levels.filter(level => level.id !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
@@ -55,7 +55,6 @@ function App() {
   function updateParents() {
     levelDropdown = document.getElementById('levelsDropdown');
     levelDropdown.options[0] = new Option("Root", 0);
-    //Array.prototype.forEach.call(levelDropdown.options ,option => optionIds.push(option.value))
     levels.forEach(level => {
       console.log("Current ID: " + level.id);
       console.log("Ids: " + optionIds);
@@ -111,6 +110,7 @@ function App() {
           <div key={level.id || level.name}>
             <h2>{level.name}</h2>
             <p>{level.description}</p>
+            <p>Test: {level.id}</p>
             <button onClick={() => deleteLevel(level.id)}>Delete level</button>
           </div>
         ))
