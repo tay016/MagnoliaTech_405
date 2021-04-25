@@ -44,7 +44,6 @@ function App() {
     if (!formData.parentID) {
       formData.parentID = "ROOT";
     }
-    console.log("PARENT:" + formData.parentID);
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     updateParents();
@@ -57,6 +56,7 @@ function App() {
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
     levels.forEach(level => {
       if (level.parentID == id) {
+        console.log("child level found");
         deleteLevel(level.id);
       }
     })
@@ -70,7 +70,6 @@ function App() {
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
         optionIds.push(level.id)
       }
-      console.log(levelDropdown.options);
     })
   }
   
