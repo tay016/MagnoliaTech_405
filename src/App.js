@@ -40,7 +40,7 @@ function App() {
 
   async function createLevel() {
     if (!formData.name || !formData.description) return;
-    formData[id] = idNum++;
+    formData['id'] = idNum++;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
