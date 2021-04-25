@@ -12,6 +12,7 @@ const initialFormState = { name: '', description: '', parentID: '' };
 var optionIds = [];
 var hierarchy = new HierarchyTree("Hierarchy");
 var levelDropdown;
+var idNum = 0;
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
 
   async function createLevel() {
     if (!formData.name || !formData.description) return;
+    formData[id] = idNum++;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
