@@ -9,16 +9,15 @@ import { HierarchyLevel, HierarchyTree } from './HierarchyTree';
 import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '', parentID: '' };
+var optionIds = [];
+var hierarchy = new HierarchyTree("Hierarchy");
+var levelDropdown;
 
 function App() {
 
   const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
-  
-  var hierarchy = new HierarchyTree("Hierarchy");
-  var levelDropdown;
-  var optionIds = [];
-  console.log("optionIds init");
+
 
 
 
