@@ -9,14 +9,15 @@ import { HierarchyLevel, HierarchyTree } from './HierarchyTree';
 import { ExportCSV } from './ExportCSV';
 
 const initialFormState = { name: '', description: '', parentID: '' };
+var optionIds = [];
+var hierarchy = new HierarchyTree("Hierarchy");
+var levelDropdown;
 
 function App() {
 
   const [levels, setLevels] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
-  
-  var hierarchy = new HierarchyTree("Hierarchy");
-  var levelDropdown;
+
 
 
 
@@ -38,31 +39,31 @@ function App() {
 
   async function createLevel() {
     if (!formData.name || !formData.description) return;
+    var idVal = Math.floor(Math.random() * 1000)
+    formData['id'] = "ID" + idVal + formData.name;
+    if (!formData.parentID) {
+      formData.parentID = "ROOT";
+    }
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
+    updateParents();
     setFormData(initialFormState);
   }
 
-  async function deleteLevel({ id }) {
-    const newLevelsArray = levels.filter(level => level.id !== id);
+  async function deleteLevel(id) {
+    const newLevelsArray = levels.filter(level => level.id !== id && level.parentID !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
   }
 
   function updateParents() {
-    console.log("update called");
     levelDropdown = document.getElementById('levelsDropdown');
     levelDropdown.options[0] = new Option("Root", 0);
-    var optionIds = []
-    Array.prototype.forEach.call(levelDropdown.options ,option => optionIds.push(option.value))
-    console.log(optionIds);
     levels.forEach(level => {
-      console.log("levels for each");
-      if (!optionIds.contains(level.id)) {
-        console.log("adding");
+      if (!optionIds.includes(level.id)) {
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
+        optionIds.push(level.id)
       }
-      console.log(levelDropdown.options);
     })
   }
   
@@ -76,27 +77,27 @@ function App() {
       <div style={{marginTop: 30}}>
         <input style={{margin: 5}}
           onChange={e => {
-            setFormData({ ...formData, 'name': e.target.value})
-            updateParents();
+            setFormData({ ...formData, 'name': e.target.value});
             }
           }
           placeholder="Level name"
           value={formData.name}
         />
         <input style={{margin: 5}}
-          onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+          onChange={e => {
+            setFormData({ ...formData, 'description': e.target.value});
+            }
+          }
           placeholder="Level description"
           value={formData.description}
         />
 
-        <select id='levelsDropdown' style={{margin: 5}}>
-          onChange={e => {
+        <select id='levelsDropdown' style={{margin: 5}} onChange={e => {
             setFormData({ ...formData, 'parentID': e.target.value});
-            updateParents();
             }
           }
           placeholder="Level parent"
-          value={formData.parentID}
+          value={formData.parentID}>
           <option value= "0">Root</option>
         </select>
       
@@ -110,7 +111,9 @@ function App() {
           <div key={level.id || level.name}>
             <h2>{level.name}</h2>
             <p>{level.description}</p>
-            <button onClick={() => deleteLevel(level)}>Delete level</button>
+            <p>ID: {level.id}</p>
+            <p>ParentID: {level.parentID}</p>
+            <button onClick={() => deleteLevel(level.id)}>Delete level</button>
           </div>
         ))
       }
