@@ -44,6 +44,7 @@ function App() {
     console.log("PARENT:" + formData.parentID);
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
+    updateParents();
     setFormData(initialFormState);
   }
 
@@ -80,27 +81,27 @@ function App() {
       <div style={{marginTop: 30}}>
         <input style={{margin: 5}}
           onChange={e => {
-            setFormData({ ...formData, 'name': e.target.value})
-            updateParents();
+            setFormData({ ...formData, 'name': e.target.value});
             }
           }
           placeholder="Level name"
           value={formData.name}
         />
         <input style={{margin: 5}}
-          onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+          onChange={e => {
+            setFormData({ ...formData, 'description': e.target.value});
+            }
+          }
           placeholder="Level description"
           value={formData.description}
         />
 
-        <select id='levelsDropdown' style={{margin: 5}}>
-          onChange={e => {
+        <select id='levelsDropdown' style={{margin: 5}} onChange={e => {
             setFormData({ ...formData, 'parentID': e.target.value});
-            updateParents();
             }
           }
           placeholder="Level parent"
-          value={formData.parentID}
+          value={formData.parentID}>
           <option value= "0">Root</option>
         </select>
       
