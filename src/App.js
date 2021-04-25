@@ -58,7 +58,7 @@ function App() {
     console.log(optionIds);
     levels.forEach(level => {
       console.log("levels for each");
-      if (!optionIds.contains(level.id)) {
+      if (!optionIds.includes(level.id)) {
         console.log("adding");
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
       }

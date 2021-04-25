@@ -4,4 +4,4 @@ type Level @model @auth(rules: [{allow: public}]) {
   description: String!
   parentID: ID
 }
- 
+  
