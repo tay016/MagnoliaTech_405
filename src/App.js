@@ -99,7 +99,7 @@ function App() {
             }
           }
           placeholder="Level parent"
-          value={formData.parentID}
+          value={formData.id}
           <option value= "0">Root</option>
         </select>
       
