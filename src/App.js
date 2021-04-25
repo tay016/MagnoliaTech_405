@@ -12,7 +12,6 @@ const initialFormState = { name: '', description: '', parentID: '' };
 var optionIds = [];
 var hierarchy = new HierarchyTree("Hierarchy");
 var levelDropdown;
-var idNum = 0;
 
 function App() {
 
@@ -40,7 +39,8 @@ function App() {
 
   async function createLevel() {
     if (!formData.name || !formData.description) return;
-    formData['id'] = idNum++;
+    var idVal = Math.floor(Math.random() * 1000)
+    formData['id'] = "ID" + idVal + formData.name;
     await API.graphql({ query: createLevelMutation, variables: { input: formData } });
     setLevels([ ...levels, formData ]);
     setFormData(initialFormState);
@@ -50,14 +50,17 @@ function App() {
     const newLevelsArray = levels.filter(level => level.id !== id);
     setLevels(newLevelsArray);
     await API.graphql({ query: deleteLevelMutation, variables: { input: { id } }});
+    levels.forEach(level => {
+      if (level.parentID == id) {
+        deleteLevel(level.id);
+      }
+    })
   }
 
   function updateParents() {
     levelDropdown = document.getElementById('levelsDropdown');
     levelDropdown.options[0] = new Option("Root", 0);
     levels.forEach(level => {
-      console.log("Current ID: " + level.id);
-      console.log("Ids: " + optionIds);
       if (!optionIds.includes(level.id)) {
         levelDropdown.options[levelDropdown.options.length] = new Option(level.name, level.id)
         optionIds.push(level.id)
@@ -111,6 +114,7 @@ function App() {
             <h2>{level.name}</h2>
             <p>{level.description}</p>
             <p>Test: {level.id}</p>
+            <p>Test: {level.parentID}</p>
             <button onClick={() => deleteLevel(level.id)}>Delete level</button>
           </div>
         ))
